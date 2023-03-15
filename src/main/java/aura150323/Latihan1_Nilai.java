@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author ACER
  */
-public class LatihanNilai {
+public class Latihan1_Nilai {
     public static void main(String [] args ) throws IOException{
         BufferedReader dataIn = new BufferedReader(new InputStreamReader (System.in));
         int a ;
