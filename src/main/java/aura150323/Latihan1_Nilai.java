@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+// LATIHAN 1 MODUL 6
 /**
  *
  * @author ACER
