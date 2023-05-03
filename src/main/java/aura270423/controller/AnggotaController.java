@@ -5,9 +5,9 @@
 package aura270423.controller;
 import aura270423.view.*;
 import aura270423.model.*;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
 import java.util.List;
+import javax.swing.table.*;
 /**
  *
  * @author ACER
@@ -26,14 +26,20 @@ public class AnggotaController {
         formAnggota.getTxtKodeAnggota().setText("");
         formAnggota.getTxtNamaAnggota().setText("");
         formAnggota.getTxtAlamat().setText("");
-        formAnggota.getCboJenisKelamin().set("");
     }
     
+    public void isiCboJenisKelamin(){
+        formAnggota.getCboJenisKelamin().removeAllItems();
+        formAnggota.getCboJenisKelamin().addItem("L");
+        formAnggota.getCboJenisKelamin().addItem("P");
+    }
     public void saveAnggota(){
         anggota = new Anggota();
-        anggota.setNobp(formAnggota.getTxtNobp().getText());
-        anggota.setNama(formAnggota.getTxtNama().getText());
+        anggota.setKodeAnggota(formAnggota.getTxtKodeAnggota().getText());
+        anggota.setNamaAnggota(formAnggota.getTxtNamaAnggota().getText());
         anggota.setAlamat(formAnggota.getTxtAlamat().getText());
+        anggota.setJeniskelamin(formAnggota.getCboJenisKelamin()
+                .getSelectedItem().toString());
         anggotaDao.save(anggota);
         JOptionPane.showMessageDialog(formAnggota, "Insert ok ");
     }
@@ -45,9 +51,10 @@ public class AnggotaController {
         List<Anggota> list = anggotaDao.getAllAnggota();
         for (Anggota anggota1 : list){
             Object row[]= {
-                anggota1.getNobp(),
-                anggota1.getNama(),
+                anggota1.getKodeAnggota(),
+                anggota1.getNamaAnggota(),
                 anggota1.getAlamat(),
+                anggota1.getJenisKelamin()
             };
             tabelModel.addRow(row);
         }

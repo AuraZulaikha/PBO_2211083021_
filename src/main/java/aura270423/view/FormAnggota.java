@@ -73,8 +73,6 @@ public class FormAnggota extends javax.swing.JFrame {
         jLabel1.setText("Kode Anggota");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(20, 50, 93, 16);
-
-        txtKodeAnggota.setText("jTextField1");
         getContentPane().add(txtKodeAnggota);
         txtKodeAnggota.setBounds(170, 50, 460, 22);
 
@@ -86,7 +84,7 @@ public class FormAnggota extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(20, 110, 80, 20);
 
-        cboJenisKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboJenisKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L","P" }));
         getContentPane().add(cboJenisKelamin);
         cboJenisKelamin.setBounds(170, 140, 110, 22);
 
@@ -94,7 +92,6 @@ public class FormAnggota extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(20, 140, 90, 16);
 
-        txtNamaAnggota.setText("jTextField2");
         txtNamaAnggota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNamaAnggotaActionPerformed(evt);
@@ -102,8 +99,6 @@ public class FormAnggota extends javax.swing.JFrame {
         });
         getContentPane().add(txtNamaAnggota);
         txtNamaAnggota.setBounds(170, 80, 460, 22);
-
-        txtAlamat.setText("jTextField3");
         getContentPane().add(txtAlamat);
         txtAlamat.setBounds(170, 110, 460, 22);
 
@@ -146,7 +141,7 @@ public class FormAnggota extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnInsert);
-        btnInsert.setBounds(50, 190, 72, 23);
+        btnInsert.setBounds(80, 190, 72, 23);
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +150,7 @@ public class FormAnggota extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnUpdate);
-        btnUpdate.setBounds(200, 190, 72, 23);
+        btnUpdate.setBounds(220, 190, 72, 23);
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +163,7 @@ public class FormAnggota extends javax.swing.JFrame {
 
         btnCancel.setText("Cancel");
         getContentPane().add(btnCancel);
-        btnCancel.setBounds(490, 190, 72, 23);
+        btnCancel.setBounds(480, 190, 72, 23);
 
         jLabel6.setText("PROGRAM FORMULIR ANGGOTA");
         getContentPane().add(jLabel6);
