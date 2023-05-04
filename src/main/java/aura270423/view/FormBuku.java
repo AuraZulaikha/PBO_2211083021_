@@ -15,8 +15,12 @@ public class FormBuku extends javax.swing.JFrame {
     /**
      * Creates new form FormBuku
      */
+    BukuController controller;
     public FormBuku() {
         initComponents();
+        controller = new BukuController(this);
+        controller.bersihForm();
+        controller.tampil();
     }
     
     public javax.swing.JTextField getTxtKodeBuku(){
@@ -78,27 +82,27 @@ public class FormBuku extends javax.swing.JFrame {
 
         jLabel2.setText("Kode Buku");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 90, 110, 16);
+        jLabel2.setBounds(30, 100, 110, 16);
 
         jLabel3.setText("Judul");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 120, 60, 16);
+        jLabel3.setBounds(30, 130, 60, 16);
 
         jLabel4.setText("Pengarang");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(30, 150, 70, 16);
+        jLabel4.setBounds(30, 160, 70, 16);
 
         jLabel5.setText("Penerbit");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(30, 180, 70, 16);
+        jLabel5.setBounds(30, 190, 70, 20);
 
         jLabel6.setText("Tahun");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(30, 210, 60, 16);
+        jLabel6.setBounds(30, 220, 60, 16);
 
         txtKodeBuku.setText("jTextField1");
         getContentPane().add(txtKodeBuku);
-        txtKodeBuku.setBounds(160, 90, 480, 22);
+        txtKodeBuku.setBounds(160, 90, 480, 30);
 
         txtJudul.setText("jTextField2");
         txtJudul.addActionListener(new java.awt.event.ActionListener() {
@@ -107,21 +111,26 @@ public class FormBuku extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtJudul);
-        txtJudul.setBounds(160, 120, 480, 22);
+        txtJudul.setBounds(160, 120, 480, 30);
 
         txtPengarang.setText("jTextField3");
         getContentPane().add(txtPengarang);
-        txtPengarang.setBounds(160, 150, 480, 22);
+        txtPengarang.setBounds(160, 150, 480, 30);
 
         txtPenerbit.setText("jTextField4");
         getContentPane().add(txtPenerbit);
-        txtPenerbit.setBounds(160, 180, 480, 22);
+        txtPenerbit.setBounds(160, 180, 480, 30);
 
         txtTahun.setText("jTextField5");
         getContentPane().add(txtTahun);
-        txtTahun.setBounds(160, 210, 480, 22);
+        txtTahun.setBounds(160, 210, 480, 30);
 
         btnInsert.setText("Insert");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnInsert);
         btnInsert.setBounds(60, 280, 72, 23);
 
@@ -135,6 +144,11 @@ public class FormBuku extends javax.swing.JFrame {
         btnUpdate.setBounds(230, 280, 72, 23);
 
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnDelete);
         btnDelete.setBounds(400, 280, 72, 23);
 
@@ -149,31 +163,39 @@ public class FormBuku extends javax.swing.JFrame {
 
         tblBuku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Kode Buku", "Judul", "Pengarang", "Penerbit", "Tahun"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblBuku.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBukuMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblBuku);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(60, 320, 580, 410);
 
-        pack();
+        setSize(new java.awt.Dimension(713, 798));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+         controller.updateBuku();
+        controller.tampil();
+        controller.bersihForm();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -183,6 +205,25 @@ public class FormBuku extends javax.swing.JFrame {
     private void txtJudulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJudulActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtJudulActionPerformed
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
+        // TODO add your handling code here:
+        controller.saveBuku();
+        controller.tampil();
+        controller.bersihForm();
+    }//GEN-LAST:event_btnInsertActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        controller.deleteBuku();
+        controller.tampil();
+        controller.bersihForm();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void tblBukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBukuMouseClicked
+        // TODO add your handling code here:
+        controller.getBuku();
+    }//GEN-LAST:event_tblBukuMouseClicked
 
     /**
      * @param args the command line arguments

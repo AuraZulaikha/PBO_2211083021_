@@ -44,6 +44,34 @@ public class AnggotaController {
         JOptionPane.showMessageDialog(formAnggota, "Insert ok ");
     }
     
+    public void updateAnggota(){
+        int index = formAnggota.getTblAnggota().getSelectedRow();
+        anggota.setKodeAnggota(formAnggota.getTxtKodeAnggota().getText());
+        anggota.setNamaAnggota(formAnggota.getTxtNamaAnggota().getText());
+        anggota.setAlamat(formAnggota.getTxtAlamat().getText());
+        anggota.setJeniskelamin(formAnggota.getCboJenisKelamin()
+                .getSelectedItem().toString());
+        anggotaDao.update(index,anggota);
+        JOptionPane.showMessageDialog(formAnggota, "Update ok ");
+    }
+    
+    public void delete(){
+        int index = formAnggota.getTblAnggota().getSelectedRow();
+        anggotaDao.delete(index);
+         JOptionPane.showMessageDialog(formAnggota, "Delete ok ");
+    }
+    
+    public void getAnggota(){
+        int index = formAnggota.getTblAnggota().getSelectedRow();
+        anggota = anggotaDao.getAnggota(index);
+        if(anggota != null ){
+            formAnggota.getTxtKodeAnggota().setText(anggota.getKodeAnggota());
+            formAnggota.getTxtNamaAnggota().setText(anggota.getNamaAnggota());
+            formAnggota.getTxtAlamat().setText(anggota.getAlamat());
+            formAnggota.getCboJenisKelamin().setSelectedItem(anggota.getJenisKelamin());
+        }
+    }
+    
     public void tampil(){
         DefaultTableModel tabelModel =
                 (DefaultTableModel) formAnggota.getTblAnggota().getModel();

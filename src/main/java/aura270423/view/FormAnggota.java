@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package aura270423.view;
+import aura270423.controller.*;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import aura270423.controller.*;
 /**
  *
  * @author ACER
@@ -15,8 +16,13 @@ public class FormAnggota extends javax.swing.JFrame {
     /**
      * Creates new form FormAnggota
      */
+    AnggotaController controller;
     public FormAnggota() {
         initComponents();
+        controller = new AnggotaController(this);
+        controller.isiCboJenisKelamin();
+        controller.bersihForm();
+        controller.tampil();
     }
     
     public javax.swing.JTextField getTxtKodeAnggota(){
@@ -74,7 +80,7 @@ public class FormAnggota extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(20, 50, 93, 16);
         getContentPane().add(txtKodeAnggota);
-        txtKodeAnggota.setBounds(170, 50, 460, 22);
+        txtKodeAnggota.setBounds(170, 50, 460, 30);
 
         jLabel2.setText("Nama Anggota");
         getContentPane().add(jLabel2);
@@ -98,37 +104,31 @@ public class FormAnggota extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtNamaAnggota);
-        txtNamaAnggota.setBounds(170, 80, 460, 22);
+        txtNamaAnggota.setBounds(170, 80, 460, 30);
         getContentPane().add(txtAlamat);
-        txtAlamat.setBounds(170, 110, 460, 22);
+        txtAlamat.setBounds(170, 110, 460, 30);
 
         tblAnggota.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Kode Anggota", "Nama Anggota", "Alamat", "Jenis Kelamin"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblAnggota.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAnggotaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblAnggota);
 
         getContentPane().add(jScrollPane1);
@@ -169,24 +169,39 @@ public class FormAnggota extends javax.swing.JFrame {
         getContentPane().add(jLabel6);
         jLabel6.setBounds(250, 10, 190, 30);
 
-        pack();
+        setSize(new java.awt.Dimension(683, 718));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         // TODO add your handling code here:
+        controller.saveAnggota();
+        controller.tampil();
+        controller.bersihForm();
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        controller.updateAnggota();
+        controller.tampil();
+        controller.bersihForm();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        controller.delete();
+        controller.tampil();
+        controller.bersihForm();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void txtNamaAnggotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaAnggotaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNamaAnggotaActionPerformed
+
+    private void tblAnggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAnggotaMouseClicked
+        // TODO add your handling code here:
+        controller.getAnggota();
+    }//GEN-LAST:event_tblAnggotaMouseClicked
 
     /**
      * @param args the command line arguments

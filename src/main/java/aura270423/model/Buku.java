@@ -30,7 +30,7 @@ public class Buku {
      public String getKodeBuku(){
         return kodeBuku;      
     }
-    public void setKodeAnggota (String kodeBuku ){
+    public void setKodeBuku (String kodeBuku ){
         this.kodeBuku = kodeBuku;
     }
     
