@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 public class FormAnggota extends javax.swing.JFrame {
 
     /**
-     * Creates new form FormAnggota
+     * Creates new form sFormAnggota
      */
     AnggotaController controller;
     public FormAnggota() {
@@ -78,7 +78,7 @@ public class FormAnggota extends javax.swing.JFrame {
 
         jLabel1.setText("Kode Anggota");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 50, 93, 16);
+        jLabel1.setBounds(20, 60, 93, 16);
         getContentPane().add(txtKodeAnggota);
         txtKodeAnggota.setBounds(170, 50, 460, 30);
 

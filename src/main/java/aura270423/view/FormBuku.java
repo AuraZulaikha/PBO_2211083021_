@@ -193,7 +193,7 @@ public class FormBuku extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-         controller.updateBuku();
+        controller.updateBuku();
         controller.tampil();
         controller.bersihForm();
     }//GEN-LAST:event_btnUpdateActionPerformed
