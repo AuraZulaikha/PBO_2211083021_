@@ -15,5 +15,5 @@ public interface AnggotaDao {
     void update(Anggota anggota)throws SQLException;
     void delete(String nobp)throws SQLException;
     Anggota getAnggota(String nobp)throws SQLException;
-    List<Anggota> getAll();
+    List<Anggota> getAll()throws SQLException;
 }
