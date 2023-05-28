@@ -4,9 +4,14 @@
  */
 package aura250523.view;
 
+import aura250523.controller.AnggotaContoller;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -17,132 +22,62 @@ import javax.swing.JTextField;
  */
 public class FormAnggota extends javax.swing.JFrame {
 
+    AnggotaContoller controller;
     /**
      * Creates new form FormAnggota
      */
     public FormAnggota() {
         initComponents();
-    }
-
-    public JButton getBtnCancel() {
-        return btnCancel;
-    }
-
-    public JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public JButton getBtnInsert() {
-        return btnInsert;
-    }
-
-    public JButton getBtnUpdate() {
-        return btnUpdate;
+        controller = new AnggotaContoller(this);
+        try {
+            controller.tampil();
+        } catch (SQLException ex) {
+            Logger.getLogger(FormAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public JComboBox<String> getCboJenisKelamin() {
         return cboJenisKelamin;
     }
 
-    public JLabel getjLabel1() {
-        return jLabel1;
-    }
-
-    public JLabel getjLabel2() {
-        return jLabel2;
-    }
-
-    public JLabel getjLabel3() {
-        return jLabel3;
-    }
-
-    public JLabel getjLabel4() {
-        return jLabel4;
-    }
-
-    public JLabel getjLabel5() {
-        return jLabel5;
-    }
-
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
+    public void setCboJenisKelamin(JComboBox<String> cboJenisKelamin) {
+        this.cboJenisKelamin = cboJenisKelamin;
     }
 
     public JTable getTblAnggota() {
         return tblAnggota;
     }
 
-    public JTextField getTxtAlamat() {
-        return txtAlamat;
-    }
-
-    public JTextField getTxtNama() {
-        return txtNama;
-    }
-
-    public JTextField getTxtNobp() {
-        return txtNobp;
-    }
-
-    public void setBtnCancel(JButton btnCancel) {
-        this.btnCancel = btnCancel;
-    }
-
-    public void setBtnDelete(JButton btnDelete) {
-        this.btnDelete = btnDelete;
-    }
-
-    public void setBtnInsert(JButton btnInsert) {
-        this.btnInsert = btnInsert;
-    }
-
-    public void setBtnUpdate(JButton btnUpdate) {
-        this.btnUpdate = btnUpdate;
-    }
-
-    public void setCboJenisKelamin(JComboBox<String> cboJenisKelamin) {
-        this.cboJenisKelamin = cboJenisKelamin;
-    }
-
-    public void setjLabel1(JLabel jLabel1) {
-        this.jLabel1 = jLabel1;
-    }
-
-    public void setjLabel2(JLabel jLabel2) {
-        this.jLabel2 = jLabel2;
-    }
-
-    public void setjLabel3(JLabel jLabel3) {
-        this.jLabel3 = jLabel3;
-    }
-
-    public void setjLabel4(JLabel jLabel4) {
-        this.jLabel4 = jLabel4;
-    }
-
-    public void setjLabel5(JLabel jLabel5) {
-        this.jLabel5 = jLabel5;
-    }
-
-    public void setjScrollPane1(JScrollPane jScrollPane1) {
-        this.jScrollPane1 = jScrollPane1;
-    }
-
     public void setTblAnggota(JTable tblAnggota) {
         this.tblAnggota = tblAnggota;
+    }
+
+    public JTextField getTxtAlamat() {
+        return txtAlamat;
     }
 
     public void setTxtAlamat(JTextField txtAlamat) {
         this.txtAlamat = txtAlamat;
     }
 
+    public JTextField getTxtNama() {
+        return txtNama;
+    }
+
     public void setTxtNama(JTextField txtNama) {
         this.txtNama = txtNama;
+    }
+
+    public JTextField getTxtNobp() {
+        return txtNobp;
     }
 
     public void setTxtNobp(JTextField txtNobp) {
         this.txtNobp = txtNobp;
     }
+    
+
+    
     
     
 
@@ -202,7 +137,7 @@ public class FormAnggota extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(40, 150, 160, 20);
 
-        cboJenisKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboJenisKelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "L", "P" }));
         getContentPane().add(cboJenisKelamin);
         cboJenisKelamin.setBounds(230, 140, 430, 30);
 
@@ -262,11 +197,18 @@ public class FormAnggota extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(40, 280, 620, 300);
 
-        pack();
+        setSize(new java.awt.Dimension(732, 620));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         // TODO add your handling code here:
+        try {
+        controller.saveAnggota();
+        controller.tampil();
+        } catch (SQLException sqlex) {
+            JOptionPane.showMessageDialog(rootPane, "Gagal disimpan = "+sqlex);
+        }
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed

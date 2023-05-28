@@ -9,6 +9,10 @@ import aura240523.dao.AnggotaDaoImpl;
 import aura240523.model.Anggota;
 import aura250523.database.DatabaseHelper;
 import aura250523.view.FormAnggota;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,5 +37,33 @@ public class AnggotaContoller {
         view.getCboJenisKelamin().removeAllItems();
         view.getCboJenisKelamin().addItem("L");
         view.getCboJenisKelamin().addItem("P");
+    }
+    
+       public void saveAnggota() throws SQLException{
+        model = new Anggota();
+        model.setNobp(view.getTxtNobp().getText());
+        model.setNama(view.getTxtNama().getText());
+        model.setAlamat(view.getTxtAlamat().getText());
+        model.setJenisKelamin(view.getCboJenisKelamin()
+                .getSelectedItem().toString());
+        dao.insert(model);
+           JOptionPane.showMessageDialog(view, "Insert ok ");
+//           tampil();
+    }
+       
+       public void tampil() throws SQLException{
+           DefaultTableModel tabelModel =
+                (DefaultTableModel) view.getTblAnggota().getModel();
+        tabelModel.setRowCount(0);
+           List<Anggota> list = dao.getAll();
+        for (Anggota anggota1 : list){
+            Object row[]= {
+                anggota1.getNobp(),
+                anggota1.getNama(),
+                anggota1.getAlamat(),
+                anggota1.getJenisKelamin()
+            };
+            tabelModel.addRow(row);
+        }
     }
 }
