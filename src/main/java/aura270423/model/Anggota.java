@@ -25,7 +25,7 @@ public class Anggota {
         this.jenisKelamin = jenisKelamin;
     }
     
-     public String getKodeAnggota(){
+    public String getKodeAnggota(){
         return kodeAnggota;      
     }
     public void setKodeAnggota (String kodeAnggota ){
