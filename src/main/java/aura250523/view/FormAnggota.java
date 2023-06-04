@@ -29,6 +29,7 @@ public class FormAnggota extends javax.swing.JFrame {
     public FormAnggota() {
         initComponents();
         controller = new AnggotaContoller(this);
+        controller.clearForm();
         try {
             controller.tampil();
         } catch (SQLException ex) {
@@ -75,12 +76,19 @@ public class FormAnggota extends javax.swing.JFrame {
     public void setTxtNobp(JTextField txtNobp) {
         this.txtNobp = txtNobp;
     }
-    
 
-    
-    
-    
+    public JButton getBtnDelete() {
+        return btnDelete;
+    }
 
+    public JButton getBtnInsert() {
+        return btnInsert;
+    }
+
+    public JButton getBtnUpdate() {
+        return btnUpdate;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,6 +181,11 @@ public class FormAnggota extends javax.swing.JFrame {
         btnDelete.setBounds(370, 230, 72, 23);
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnCancel);
         btnCancel.setBounds(540, 230, 72, 23);
 
@@ -192,6 +205,11 @@ public class FormAnggota extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblAnggota.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAnggotaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblAnggota);
 
         getContentPane().add(jScrollPane1);
@@ -204,8 +222,9 @@ public class FormAnggota extends javax.swing.JFrame {
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         // TODO add your handling code here:
         try {
-        controller.saveAnggota();
-        controller.tampil();
+            controller.saveAnggota();
+            controller.tampil();
+            controller.clearForm();
         } catch (SQLException sqlex) {
             JOptionPane.showMessageDialog(rootPane, "Gagal disimpan = "+sqlex);
         }
@@ -213,11 +232,36 @@ public class FormAnggota extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        try {
+            controller.update();
+            controller.tampil();
+            controller.clearForm();
+        } catch (SQLException sqlex) {
+            JOptionPane.showMessageDialog(rootPane, "Gagal disimpan = "+sqlex);
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:   
+        try {
+            controller.delete();
+            controller.tampil();
+            controller.clearForm();
+        } catch (SQLException sqlex) {
+            JOptionPane.showMessageDialog(rootPane, "Gagal disimpan = "+sqlex);
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void tblAnggotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAnggotaMouseClicked
+       // TODO add your handling code here:
+       controller.getAnggota();
+       
+    }//GEN-LAST:event_tblAnggotaMouseClicked
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        controller.clearForm();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments

@@ -31,39 +31,77 @@ public class AnggotaContoller {
     }
     
     public void clearForm(){
+        view.getTxtNobp().setEditable(true);
         view.getTxtNobp().setText("");
         view.getTxtNama().setText("");
         view.getTxtAlamat().setText("");
         view.getCboJenisKelamin().removeAllItems();
         view.getCboJenisKelamin().addItem("L");
         view.getCboJenisKelamin().addItem("P");
+        view.getBtnInsert().setEnabled(true);
+        view.getBtnUpdate().setEnabled(false);
+        view.getBtnDelete().setEnabled(false);
     }
     
-       public void saveAnggota() throws SQLException{
+    public void saveAnggota() throws SQLException{
         model = new Anggota();
         model.setNobp(view.getTxtNobp().getText());
         model.setNama(view.getTxtNama().getText());
         model.setAlamat(view.getTxtAlamat().getText());
-        model.setJenisKelamin(view.getCboJenisKelamin()
-                .getSelectedItem().toString());
+        model.setJenisKelamin(view.getCboJenisKelamin().getSelectedItem().toString());
         dao.insert(model);
-           JOptionPane.showMessageDialog(view, "Insert ok ");
-//           tampil();
+        JOptionPane.showMessageDialog(view, "Insert ok ");
     }
        
-       public void tampil() throws SQLException{
-           DefaultTableModel tabelModel =
-                (DefaultTableModel) view.getTblAnggota().getModel();
+    public void tampil() throws SQLException{
+        DefaultTableModel tabelModel = (DefaultTableModel) view.getTblAnggota().getModel();
         tabelModel.setRowCount(0);
-           List<Anggota> list = dao.getAll();
-        for (Anggota anggota1 : list){
-            Object row[]= {
-                anggota1.getNobp(),
-                anggota1.getNama(),
-                anggota1.getAlamat(),
-                anggota1.getJenisKelamin()
-            };
-            tabelModel.addRow(row);
+        List<Anggota> list = dao.getAll();
+        if (list != null){
+            for (Anggota anggota1 : list){
+                Object row[]= {
+                    anggota1.getNobp(),
+                    anggota1.getNama(),
+                    anggota1.getAlamat(),
+                    anggota1.getJenisKelamin()
+                };
+                tabelModel.addRow(row);
+            }
         }
     }
+    
+    public void getAnggota() {
+        view.getTxtNobp().setEditable(false);
+        view.getBtnInsert().setEnabled(false);
+        view.getBtnUpdate().setEnabled(true);
+        view.getBtnDelete().setEnabled(true);
+        try {
+            String nobp = view.getTblAnggota().getValueAt(view.getTblAnggota().getSelectedRow(), 0).toString();
+            model = dao.getAnggota(nobp);
+            if(model != null){
+                view.getTxtNobp().setText(model.getNobp());
+                view.getTxtNama().setText(model.getNama());
+                view.getTxtAlamat().setText(model.getAlamat());
+                view.getCboJenisKelamin().setSelectedItem(model.getJenisKelamin());
+            }
+        } catch (SQLException ex ){
+        }
+    }
+    
+    public void update () throws SQLException{
+        model = new Anggota();
+        model.setNobp(view.getTxtNobp().getText());
+        model.setNama(view.getTxtNama().getText());
+        model.setAlamat(view.getTxtAlamat().getText());
+        model.setJenisKelamin(view.getCboJenisKelamin().getSelectedItem().toString());
+        dao.update(model);
+        JOptionPane.showMessageDialog(view, "Update ok ");
+    }
+    
+    public void delete () throws SQLException{
+        String nobp = view.getTxtNobp().getText().toString();
+        dao.delete(nobp);
+        JOptionPane.showMessageDialog(view, "Delete ok ");
+    }
 }
+       

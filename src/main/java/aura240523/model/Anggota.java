@@ -56,4 +56,5 @@ public class Anggota {
     public void setJenisKelamin(String jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
     }
+    
 }

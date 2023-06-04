@@ -4,9 +4,14 @@
  */
 package aura250523.database;
 
+import aura240523.dao.AnggotaDao;
+import aura240523.dao.AnggotaDaoImpl;
+import aura240523.model.Anggota;
 import java.sql.Connection;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
@@ -28,10 +33,18 @@ public class DatabaseHelper {
     }
     public static void main(String [] args ){
         try {
-            Connection con = getConnection();
-            JOptionPane.showMessageDialog(null, "Koneksi Ok");
+            connection = DatabaseHelper.getConnection();
+            Anggota anggota = new Anggota ();
+            anggota.setNobp("98312111");
+            anggota.setNama("Ali");
+            anggota.setAlamat("Paris");
+            anggota.setJenisKelamin("L");
+            AnggotaDao dao = new AnggotaDaoImpl(connection);
+            dao.insert(anggota);
+            JOptionPane.showMessageDialog(null, "Entri Ok");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
+            Logger.getLogger(DatabaseHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

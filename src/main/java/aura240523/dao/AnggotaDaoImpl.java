@@ -27,7 +27,7 @@ public class AnggotaDaoImpl implements AnggotaDao {
     }
     
     public void update(Anggota anggota)throws SQLException{
-        String sql="Update anggota set nama=?, alamat=?, jeniskelamin=?, where nobp=?";
+        String sql="Update anggota set nama=?, alamat=?, jenis_kelamin=? where nobp=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, anggota.getNama());
         ps.setString(2, anggota.getAlamat());
@@ -65,7 +65,7 @@ public class AnggotaDaoImpl implements AnggotaDao {
         ResultSet rs = ps.executeQuery();
         List <Anggota> list = new ArrayList<>();
         while (rs.next()){
-             anggota = new Anggota();
+            anggota = new Anggota();
             anggota.setNobp(rs.getString(1));
             anggota.setNama(rs.getString(2));
             anggota.setAlamat(rs.getString(3));
