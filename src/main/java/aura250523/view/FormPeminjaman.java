@@ -28,14 +28,13 @@ public class FormPeminjaman extends javax.swing.JFrame {
         initComponents();
         controller = new PeminjamanController(this);
         controller.clearForm();
-        try {
-            controller.tampil();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "erornya ini : " +ex);
-        }
+        controller.isiComboAnggota();
+        controller.isiComboBuku();
+        controller.tampilTabel();
+                
     }
 
-    public JComboBox<String> getCboKodeBuku() {
+    public JComboBox<String> getCboKodebuku() {
         return cboKodeBuku;
     }
 
@@ -54,19 +53,6 @@ public class FormPeminjaman extends javax.swing.JFrame {
     public JTextField getTxtTglPinjam() {
         return txtTglPinjam;
     }
-
-    public JButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public JButton getBtnInsert() {
-        return btnInsert;
-    }
-
-    public JButton getBtnUpdate() {
-        return btnUpdate;
-    }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -213,35 +199,23 @@ public class FormPeminjaman extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        try {
-            controller.insert();
-            controller.clearForm();
-            controller.tampil();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormPeminjaman.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        controller.insert();
+        controller.clearForm();
+        controller.tampilTabel();
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        try {
-            controller.update();
-            controller.clearForm();
-            controller.tampil();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormPeminjaman.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        controller.update();
+        controller.clearForm();
+        controller.tampilTabel();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        try {
-            controller.delete();
-            controller.clearForm();
-            controller.tampil();
-        } catch (SQLException ex) {
-            Logger.getLogger(FormPeminjaman.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        controller.delete();
+        controller.clearForm();
+        controller.tampilTabel();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

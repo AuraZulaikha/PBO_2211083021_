@@ -9,52 +9,50 @@ package aura240523.model;
  * @author ACER
  */
 public class Peminjaman {
-    private String nobp;
-    private String kodeBuku;
-    private String tglPinjam;
-    private String tglKembali;
-    
-    public Peminjaman(){
-        
-    }
-    
-    public Peminjaman (String nobp, String kodeBuku, String tglPinjam, String tglKembali){
-        this.nobp = nobp;
-        this.kodeBuku = kodeBuku;
-        this.tglPinjam = tglPinjam;
-        this.tglKembali = tglKembali;
+     private Anggota anggota;
+    private Buku buku;
+    private String tglpinjam;
+    private String tglkembali;
+
+    public Peminjaman() {
     }
 
-    public String getNobp() {
-        return nobp;
+    public Peminjaman(Anggota anggota, Buku buku, String tglpinjam, String tglkembali) {
+        this.anggota = anggota;
+        this.buku = buku;
+        this.tglpinjam = tglpinjam;
+        this.tglkembali = tglkembali;
     }
 
-    public void setNobp(String nobp) {
-        this.nobp = nobp;
+    public Anggota getAnggota() {
+        return anggota;
     }
 
-    public String getKodeBuku() {
-        return kodeBuku;
+    public void setAnggota(Anggota anggota) {
+        this.anggota = anggota;
     }
 
-    public void setKodeBuku(String kodeBuku) {
-        this.kodeBuku = kodeBuku;
+    public Buku getBuku() {
+        return buku;
     }
 
-    public String getTglPinjam() {
-        return tglPinjam;
+    public void setBuku(Buku buku) {
+        this.buku = buku;
     }
 
-    public void setTglPinjam(String tglPinjam) {
-        this.tglPinjam = tglPinjam;
+    public String getTglpinjam() {
+        return tglpinjam;
     }
 
-    public String getTglKembali() {
-        return tglKembali;
+    public void setTglpinjam(String tglpinjam) {
+        this.tglpinjam = tglpinjam;
     }
 
-    public void setTglKembali(String tglKembali) {
-        this.tglKembali = tglKembali;
+    public String getTglkembali() {
+        return tglkembali;
     }
-    
+
+    public void setTglkembali(String tglkembali) {
+        this.tglkembali = tglkembali;
+    }  
 }

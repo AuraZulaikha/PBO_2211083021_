@@ -4,6 +4,7 @@
  */
 package aura250523.view;
 
+import aura250523.controller.PengembalianController;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -18,8 +19,14 @@ public class FormPengembalian extends javax.swing.JFrame {
     /**
      * Creates new form FormPengembalian
      */
+    PengembalianController controller;
     public FormPengembalian() {
         initComponents();
+        controller = new PengembalianController(this);
+        controller.clearForm();
+        controller.isiCboAnggota();
+        controller.isiCboBuku();
+        controller.tampilTabel();
     }
 
     public JButton getBtnCancel() {
@@ -190,6 +197,11 @@ public class FormPengembalian extends javax.swing.JFrame {
         btnInsert.setBounds(70, 310, 72, 23);
 
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnUpdate);
         btnUpdate.setBounds(260, 310, 72, 23);
 
@@ -216,11 +228,22 @@ public class FormPengembalian extends javax.swing.JFrame {
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         // TODO add your handling code here:
+        controller.insert();
+        controller.clearForm();
+        controller.tampilTabel();
     }//GEN-LAST:event_btnInsertActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        controller.isiCboAnggota();
+        controller.isiCboBuku();
+        controller.clearForm();
+        controller.tampilTabel();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments
